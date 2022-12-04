@@ -1,0 +1,288 @@
+<html data-ruffle-optout=""><head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Duck Life Loader</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+        
+        
+        <link rel="icon" href="https://i.ibb.co/0Gcw8kR/ducklife1-5-text.png" sizes="100%x100%">
+    <style>:root {
+    --ruffle-blue: #37528c;
+    --ruffle-orange: #ffad33;
+    --preloader-background: #;
+}
+
+body {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0;
+    margin: 0;
+    font-family: Lato, sans-serif;
+    display: flex;
+    flex-flow: column;
+    background: black;
+}
+
+#main {
+    position: relative;
+    flex: 1;
+}
+
+#overlay {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    pointer-events: none;
+    border: 8px dashed var(--ruffle-orange);
+    border-radius: 30px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in;
+    margin: 10px 5px;
+}
+
+#overlay.drag {
+    opacity: 1;
+    transition-timing-function: ease-out;
+}
+
+#player {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: auto;
+    margin: 10px 0;
+}
+
+#nav {
+    width: 100%;
+    background: var(--ruffle-blue);
+    box-shadow: 0 3px 6px 5px var(--ruffle-blue);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    padding: 10px 0 5px;
+    margin-bottom: 5px;
+}
+
+#title {
+    transition: opacity 0.5s;
+}
+
+#title:hover {
+    opacity: 0.5;
+}
+
+#title img {
+    height: 32px;
+}
+
+#file-picker select,
+#file-picker input,
+#author {
+    margin-left: 5px;
+}
+
+#local-file-container,
+#sample-swfs-container {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+#local-file {
+    width: 0;
+    opacity: 0;
+    position: absolute;
+}
+
+#local-file-label {
+    color: var(--ruffle-blue);
+    padding: 3px 10px;
+    margin: 5px 2px;
+    cursor: pointer;
+    border-radius: 50px;
+    background-color: white;
+}
+
+#local-file-name {
+    min-width: 150px;
+    display: inline-block;
+    font-size: smaller;
+}
+
+#sample-swfs {
+    background-color: white;
+    color: var(--ruffle-blue);
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+#author-container {
+    font-size: small;
+}
+
+#author {
+    color: var(--ruffle-orange);
+}
+
+.hidden {
+    display: none !important;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.modal-content {
+    background-color: var(--ruffle-blue);
+    margin: 15vh auto;
+    padding: 20px;
+    border: 2px solid white;
+    width: 300px;
+    height: 270px;
+    overflow: auto;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#open-modal {
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#metadata {
+    margin: 0 auto;
+}
+
+#metadata td {
+    padding: 2px 1px;
+    border: 1px solid #ddd;
+    color: var(--ruffle-orange);
+}
+
+#metadata tr td:nth-child(1) {
+    font-weight: bold;
+    padding: 0 10px;
+}
+
+@media only screen and (max-width: 800px) {
+    #local-file-container,
+    #sample-swfs-container {
+        display: block;
+    }
+
+    #local-file-container {
+        margin-bottom: 10px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #local-file-static-label,
+    #sample-swfs-label {
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    #author-container {
+        font-size: 12px;
+        text-align: center;
+    }
+
+    #nav {
+        flex-flow: column;
+    }
+}
+
+/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8uL3d3dy9pbmRleC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxzQkFBc0I7SUFDdEIsd0JBQXdCO0lBQ3hCLCtCQUErQjtBQUNuQzs7QUFFQTtJQUNJLGtCQUFrQjtJQUNsQixNQUFNO0lBQ04sU0FBUztJQUNULE9BQU87SUFDUCxRQUFRO0lBQ1IsVUFBVTtJQUNWLFNBQVM7SUFDVCw2QkFBNkI7SUFDN0IsYUFBYTtJQUNiLGlCQUFpQjtJQUNqQixpQkFBaUI7QUFDckI7O0FBRUE7SUFDSSxrQkFBa0I7SUFDbEIsT0FBTztBQUNYOztBQUVBO0lBQ0ksa0JBQWtCO0lBQ2xCLE1BQU07SUFDTixTQUFTO0lBQ1QsT0FBTztJQUNQLFFBQVE7SUFDUixVQUFVO0lBQ1Ysb0JBQW9CO0lBQ3BCLHVDQUF1QztJQUN2QyxtQkFBbUI7SUFDbkIsVUFBVTtJQUNWLGdDQUFnQztJQUNoQyxnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSxVQUFVO0lBQ1Ysb0NBQW9DO0FBQ3hDOztBQUVBO0lBQ0ksa0JBQWtCO0lBQ2xCLE1BQU07SUFDTixTQUFTO0lBQ1QsT0FBTztJQUNQLFFBQVE7SUFDUixXQUFXO0lBQ1gsWUFBWTtJQUNaLGNBQWM7QUFDbEI7O0FBRUE7SUFDSSxXQUFXO0lBQ1gsOEJBQThCO0lBQzlCLDRDQUE0QztJQUM1QyxhQUFhO0lBQ2IsbUJBQW1CO0lBQ25CLDZCQUE2QjtJQUM3QixZQUFZO0lBQ1osbUJBQW1CO0lBQ25CLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLHdCQUF3QjtBQUM1Qjs7QUFFQTtJQUNJLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxZQUFZO0FBQ2hCOztBQUVBOzs7SUFHSSxnQkFBZ0I7QUFDcEI7O0FBRUE7O0lBRUkscUJBQXFCO0lBQ3JCLHNCQUFzQjtBQUMxQjs7QUFFQTtJQUNJLFFBQVE7SUFDUixVQUFVO0lBQ1Ysa0JBQWtCO0FBQ3RCOztBQUVBO0lBQ0kseUJBQXlCO0lBQ3pCLGlCQUFpQjtJQUNqQixlQUFlO0lBQ2YsZUFBZTtJQUNmLG1CQUFtQjtJQUNuQix1QkFBdUI7QUFDM0I7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIscUJBQXFCO0lBQ3JCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLHVCQUF1QjtJQUN2Qix5QkFBeUI7SUFDekIsdUJBQXVCO0lBQ3ZCLGtCQUFrQjtBQUN0Qjs7QUFFQTtJQUNJLGdCQUFnQjtBQUNwQjs7QUFFQTtJQUNJLDJCQUEyQjtBQUMvQjs7QUFFQTtJQUNJLHdCQUF3QjtBQUM1Qjs7QUFFQTtJQUNJLGFBQWE7SUFDYixlQUFlO0lBQ2YsVUFBVTtJQUNWLE9BQU87SUFDUCxNQUFNO0lBQ04sV0FBVztJQUNYLFlBQVk7QUFDaEI7O0FBRUE7SUFDSSxvQ0FBb0M7SUFDcEMsaUJBQWlCO0lBQ2pCLGFBQWE7SUFDYix1QkFBdUI7SUFDdkIsWUFBWTtJQUNaLGFBQWE7SUFDYixjQUFjO0FBQ2xCOztBQUVBO0lBQ0ksV0FBVztJQUNYLFlBQVk7SUFDWixlQUFlO0lBQ2YsaUJBQWlCO0lBQ2pCLGVBQWU7QUFDbkI7O0FBRUE7SUFDSSxzQkFBc0I7SUFDdEIsZUFBZTtBQUNuQjs7QUFFQTtJQUNJLGNBQWM7QUFDbEI7O0FBRUE7SUFDSSxnQkFBZ0I7SUFDaEIsc0JBQXNCO0lBQ3RCLDJCQUEyQjtBQUMvQjs7QUFFQTtJQUNJLGlCQUFpQjtJQUNqQixlQUFlO0FBQ25COztBQUVBO0lBQ0k7O1FBRUksY0FBYztJQUNsQjs7SUFFQTtRQUNJLG1CQUFtQjtJQUN2QjtBQUNKOztBQUVBO0lBQ0k7O1FBRUksY0FBYztRQUNkLGtCQUFrQjtJQUN0Qjs7SUFFQTtRQUNJLGVBQWU7UUFDZixrQkFBa0I7SUFDdEI7O0lBRUE7UUFDSSxpQkFBaUI7SUFDckI7QUFDSiIsInNvdXJjZXNDb250ZW50IjpbIjpyb290IHtcbiAgICAtLXJ1ZmZsZS1ibHVlOiAjMzc1MjhjO1xuICAgIC0tcnVmZmxlLW9yYW5nZTogI2ZmYWQzMztcbiAgICAtLXByZWxvYWRlci1iYWNrZ3JvdW5kOiAjMzE0OTdkO1xufVxuXG5ib2R5IHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIGJvdHRvbTogMDtcbiAgICBsZWZ0OiAwO1xuICAgIHJpZ2h0OiAwO1xuICAgIHBhZGRpbmc6IDA7XG4gICAgbWFyZ2luOiAwO1xuICAgIGZvbnQtZmFtaWx5OiBMYXRvLCBzYW5zLXNlcmlmO1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1mbG93OiBjb2x1bW47XG4gICAgYmFja2dyb3VuZDogYmxhY2s7XG59XG5cbiNtYWluIHtcbiAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgZmxleDogMTtcbn1cblxuI292ZXJsYXkge1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICB0b3A6IDA7XG4gICAgYm90dG9tOiAwO1xuICAgIGxlZnQ6IDA7XG4gICAgcmlnaHQ6IDA7XG4gICAgei1pbmRleDogMTtcbiAgICBwb2ludGVyLWV2ZW50czogbm9uZTtcbiAgICBib3JkZXI6IDhweCBkYXNoZWQgdmFyKC0tcnVmZmxlLW9yYW5nZSk7XG4gICAgYm9yZGVyLXJhZGl1czogMzBweDtcbiAgICBvcGFjaXR5OiAwO1xuICAgIHRyYW5zaXRpb246IG9wYWNpdHkgMC4zcyBlYXNlLWluO1xuICAgIG1hcmdpbjogMTBweCA1cHg7XG59XG5cbiNvdmVybGF5LmRyYWcge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgdHJhbnNpdGlvbi10aW1pbmctZnVuY3Rpb246IGVhc2Utb3V0O1xufVxuXG4jcGxheWVyIHtcbiAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgdG9wOiAwO1xuICAgIGJvdHRvbTogMDtcbiAgICBsZWZ0OiAwO1xuICAgIHJpZ2h0OiAwO1xuICAgIHdpZHRoOiBhdXRvO1xuICAgIGhlaWdodDogYXV0bztcbiAgICBtYXJnaW46IDEwcHggMDtcbn1cblxuI25hdiB7XG4gICAgd2lkdGg6IDEwMCU7XG4gICAgYmFja2dyb3VuZDogdmFyKC0tcnVmZmxlLWJsdWUpO1xuICAgIGJveC1zaGFkb3c6IDAgM3B4IDZweCA1cHggdmFyKC0tcnVmZmxlLWJsdWUpO1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbiAgICBjb2xvcjogd2hpdGU7XG4gICAgcGFkZGluZzogMTBweCAwIDVweDtcbiAgICBtYXJnaW4tYm90dG9tOiA1cHg7XG59XG5cbiN0aXRsZSB7XG4gICAgdHJhbnNpdGlvbjogb3BhY2l0eSAwLjVzO1xufVxuXG4jdGl0bGU6aG92ZXIge1xuICAgIG9wYWNpdHk6IDAuNTtcbn1cblxuI3RpdGxlIGltZyB7XG4gICAgaGVpZ2h0OiAzMnB4O1xufVxuXG4jZmlsZS1waWNrZXIgc2VsZWN0LFxuI2ZpbGUtcGlja2VyIGlucHV0LFxuI2F1dGhvciB7XG4gICAgbWFyZ2luLWxlZnQ6IDVweDtcbn1cblxuI2xvY2FsLWZpbGUtY29udGFpbmVyLFxuI3NhbXBsZS1zd2ZzLWNvbnRhaW5lciB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XG59XG5cbiNsb2NhbC1maWxlIHtcbiAgICB3aWR0aDogMDtcbiAgICBvcGFjaXR5OiAwO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbn1cblxuI2xvY2FsLWZpbGUtbGFiZWwge1xuICAgIGNvbG9yOiB2YXIoLS1ydWZmbGUtYmx1ZSk7XG4gICAgcGFkZGluZzogM3B4IDEwcHg7XG4gICAgbWFyZ2luOiA1cHggMnB4O1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICBib3JkZXItcmFkaXVzOiA1MHB4O1xuICAgIGJhY2tncm91bmQtY29sb3I6IHdoaXRlO1xufVxuXG4jbG9jYWwtZmlsZS1uYW1lIHtcbiAgICBtaW4td2lkdGg6IDE1MHB4O1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgICBmb250LXNpemU6IHNtYWxsZXI7XG59XG5cbiNzYW1wbGUtc3dmcyB7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogd2hpdGU7XG4gICAgY29sb3I6IHZhcigtLXJ1ZmZsZS1ibHVlKTtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB3aGl0ZTtcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XG59XG5cbiNhdXRob3ItY29udGFpbmVyIHtcbiAgICBmb250LXNpemU6IHNtYWxsO1xufVxuXG4jYXV0aG9yIHtcbiAgICBjb2xvcjogdmFyKC0tcnVmZmxlLW9yYW5nZSk7XG59XG5cbi5oaWRkZW4ge1xuICAgIGRpc3BsYXk6IG5vbmUgIWltcG9ydGFudDtcbn1cblxuLm1vZGFsIHtcbiAgICBkaXNwbGF5OiBub25lO1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB6LWluZGV4OiAxO1xuICAgIGxlZnQ6IDA7XG4gICAgdG9wOiAwO1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogMTAwJTtcbn1cblxuLm1vZGFsLWNvbnRlbnQge1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLXJ1ZmZsZS1ibHVlKTtcbiAgICBtYXJnaW46IDE1dmggYXV0bztcbiAgICBwYWRkaW5nOiAyMHB4O1xuICAgIGJvcmRlcjogMnB4IHNvbGlkIHdoaXRlO1xuICAgIHdpZHRoOiAzMDBweDtcbiAgICBoZWlnaHQ6IDI3MHB4O1xuICAgIG92ZXJmbG93OiBhdXRvO1xufVxuXG4uY2xvc2Uge1xuICAgIGNvbG9yOiAjYWFhO1xuICAgIGZsb2F0OiByaWdodDtcbiAgICBmb250LXNpemU6IDI4cHg7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xufVxuXG4jb3Blbi1tb2RhbCB7XG4gICAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG59XG5cbiNtZXRhZGF0YSB7XG4gICAgbWFyZ2luOiAwIGF1dG87XG59XG5cbiNtZXRhZGF0YSB0ZCB7XG4gICAgcGFkZGluZzogMnB4IDFweDtcbiAgICBib3JkZXI6IDFweCBzb2xpZCAjZGRkO1xuICAgIGNvbG9yOiB2YXIoLS1ydWZmbGUtb3JhbmdlKTtcbn1cblxuI21ldGFkYXRhIHRyIHRkOm50aC1jaGlsZCgxKSB7XG4gICAgZm9udC13ZWlnaHQ6IGJvbGQ7XG4gICAgcGFkZGluZzogMCAxMHB4O1xufVxuXG5AbWVkaWEgb25seSBzY3JlZW4gYW5kIChtYXgtd2lkdGg6IDgwMHB4KSB7XG4gICAgI2xvY2FsLWZpbGUtY29udGFpbmVyLFxuICAgICNzYW1wbGUtc3dmcy1jb250YWluZXIge1xuICAgICAgICBkaXNwbGF5OiBibG9jaztcbiAgICB9XG5cbiAgICAjbG9jYWwtZmlsZS1jb250YWluZXIge1xuICAgICAgICBtYXJnaW4tYm90dG9tOiAxMHB4O1xuICAgIH1cbn1cblxuQG1lZGlhIG9ubHkgc2NyZWVuIGFuZCAobWF4LXdpZHRoOiA2MDBweCkge1xuICAgICNsb2NhbC1maWxlLXN0YXRpYy1sYWJlbCxcbiAgICAjc2FtcGxlLXN3ZnMtbGFiZWwge1xuICAgICAgICBkaXNwbGF5OiBibG9jaztcbiAgICAgICAgbWFyZ2luLWJvdHRvbTogNXB4O1xuICAgIH1cblxuICAgICNhdXRob3ItY29udGFpbmVyIHtcbiAgICAgICAgZm9udC1zaXplOiAxMnB4O1xuICAgICAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgfVxuXG4gICAgI25hdiB7XG4gICAgICAgIGZsZXgtZmxvdzogY29sdW1uO1xuICAgIH1cbn1cbiJdLCJzb3VyY2VSb290IjoiIn0= */</style><style type="text/css"></style><style type="text/css" id="tts-styles">[data-tts-block-id].tts-active {background: rgba(206, 225, 255, 0.9) !important;} [data-tts-sentence-id].tts-active {background: rgba(0, 89, 191, 0.7) !important;}</style></head>
+    <body>
+        <div id="nav">
+            <div id="title">
+                <a target="_blank">
+                    <img src="https://linkpicture.com/q/ducklife1-5.gif" alt="Ruffle" data-canonical-src="https://ruffle.rs/assets/logo.svg"><span id="sample-swfs-label"> Duck Life Loader</span>
+                </a>
+            </div>
+            <div id="file-picker">
+                
+                <div id="sample-swfs-container" class="">
+                    
+                    <span id="sample-swfs-label">Sample SWF:</span><select id="sample-swfs" aria-describedby="sample-swfs-label"><option value="none">None</option>
+                        
+                        <optgroup id="games-optgroup" label="Wix Games"><option value="ducklife.swf">Duck Life</option><option value="ducklife2.swf">Duck Life 2</option><option value="ducklife3.swf">Duck Life 3</option><option value="ducklife4.swf">Duck Life 4</option><option value="ducklife5.swf">Duck Life 5</option></optgroup>
+                    </select>
+                    
+                </div>
+                &emsp;
+                
+            </div>
+        </div>
+        <div id="main" aria-label="Select a demo or drag an SWF">
+            <div id="overlay" class=""></div>
+        <ruffle-player id="player"></ruffle-player></div>
+        <div id="metadata-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="close-modal">×</span>
+                <table id="metadata">
+                    <tbody><tr>
+                        <td>Uncompressed Length</td>
+                        <td><span class="metadata" id="uncompressedLength">39Kb</span></td>
+                    </tr>
+                    <tr>
+                        <td>SWF Version</td>
+                        <td><span class="metadata" id="swfVersion">15</span></td>
+                    </tr>
+                    <tr>
+                        <td>FP Version</td>
+                        <td><span class="metadata" id="flashVersion">11.2</span></td>
+                    </tr>
+                    <tr>
+                        <td>ActionScript 3</td>
+                        <td><span class="metadata" id="isActionScript3">false</span></td>
+                    </tr>
+                    <tr>
+                        <td>Total Frames</td>
+                        <td><span class="metadata" id="numFrames">1</span></td>
+                    </tr>
+                    <tr>
+                        <td>Frame Rate</td>
+                        <td><span class="metadata" id="frameRate">30</span></td>
+                    </tr>
+                    <tr>
+                        <td>SWF Width</td>
+                        <td><span class="metadata" id="width">600</span></td>
+                    </tr>
+                    <tr>
+                        <td>SWF Height</td>
+                        <td><span class="metadata" id="height">400</span></td>
+                    </tr>
+                    <tr>
+                        <td>SWF Background Color</td>
+                        <td><input class="metadata" type="color" id="backgroundColor" disabled="" value="#FFFFFF"></td>
+                    </tr>
+                </tbody></table>
+            </div>
+        </div>
+        <script src="index.js"></script>
+    
+
+</body></html>
